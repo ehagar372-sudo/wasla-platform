@@ -173,12 +173,18 @@ export default async function ExplorePage({ searchParams }: { searchParams: Sear
                 <span className="mx-auto mb-4 grid size-14 place-items-center rounded-2xl bg-lavender text-accent">
                   <SearchX className="size-7" aria-hidden="true" />
                 </span>
-                <h2 className="text-xl font-bold">{e.emptyTitle}</h2>
-                <p className="mt-2 text-muted">{e.emptyText}</p>
-                {hasFilters && (
+                <h2 className="text-xl font-bold">{hasFilters ? e.emptyTitle : e.noListingsTitle}</h2>
+                <p className="mt-2 text-muted">{hasFilters ? e.emptyText : e.noListingsText}</p>
+                {hasFilters ? (
                   <ButtonLink href="/explore" variant="secondary" className="mt-6">
                     {e.clear}
                   </ButtonLink>
+                ) : (
+                  !listingsResult.demo && (
+                    <ButtonLink href="/sign-up" className="mt-6">
+                      {e.noListingsCta}
+                    </ButtonLink>
+                  )
                 )}
               </div>
             )}

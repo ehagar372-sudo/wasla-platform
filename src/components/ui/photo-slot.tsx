@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import Image from "next/image";
-import { Camera } from "lucide-react";
 import type { ReactNode } from "react";
 import { cx } from "@/lib/utils";
+import { PhotoImage } from "./photo-image";
+import { BrandArt } from "./brand-art";
 
 function photoExists(file: string): boolean {
   try {
@@ -14,52 +14,41 @@ function photoExists(file: string): boolean {
 }
 
 interface PhotoSlotProps {
-  /** Path inside /public, e.g. "/photos/hero.jpg" */
+  /** Path inside /public, e.g. "/photos/hero.jpg" (browser path: no "public" prefix). */
   file: string;
   alt: string;
   className?: string;
   sizes?: string;
   priority?: boolean;
-  /** Replaces the default placeholder when the photo file is missing (e.g. a category icon). */
+  /** Visual shown instead of the photo when the file is missing or fails to load (e.g. a category icon). */
   fallback?: ReactNode;
-  /** Hide the "photograph slot" caption on small placeholders. */
-  quiet?: boolean;
-  slotLabel: string;
 }
 
 /**
- * Shows a real photograph if the file exists in /public, otherwise a clearly identified
- * placeholder. It never substitutes cartoons or invented image URLs.
- * Server Component (checks the filesystem).
+ * Shows the photograph from /public when the file exists. Otherwise (or if loading fails) a clean branded
+ * visual is shown, never a "photo slot" caption or a broken-image icon. Server Component (checks the filesystem).
  */
-export function PhotoSlot({ file, alt, className, sizes, priority, fallback, quiet, slotLabel }: PhotoSlotProps) {
+export function PhotoSlot({ file, alt, className, sizes, priority, fallback }: PhotoSlotProps) {
   const exists = photoExists(file);
 
   return (
     <div className={cx("relative overflow-hidden bg-lavender", className)}>
-      {exists ? (
-        <Image src={file} alt={alt} fill sizes={sizes ?? "(min-width: 1024px) 50vw, 100vw"} priority={priority} className="object-cover" />
-      ) : (
-        <div
-          role="img"
-          aria-label={alt}
-          className="absolute inset-0 grid place-items-center bg-gradient-to-br from-lavender via-surface-2 to-lavender p-4 text-center"
-        >
-          {fallback ?? (
-            <div className="max-w-[16rem] text-accent">
-              <Camera className="mx-auto mb-2 size-7 opacity-80" aria-hidden="true" />
-              {!quiet && (
-                <>
-                  <p className="text-sm font-bold">{slotLabel}</p>
-                  <p className="mt-1 text-xs leading-5 text-muted" dir="ltr">
-                    public{file}
-                  </p>
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      )}
+      <div
+        role={exists ? undefined : "img"}
+        aria-label={exists ? undefined : alt}
+        aria-hidden={exists ? true : undefined}
+        className="absolute inset-0 grid place-items-center text-accent"
+      >
+        {fallback ? (
+          <>
+            <BrandArt />
+            <div className="relative">{fallback}</div>
+          </>
+        ) : (
+          <BrandArt />
+        )}
+      </div>
+      {exists && <PhotoImage src={file} alt={alt} sizes={sizes} priority={priority} />}
     </div>
   );
 }

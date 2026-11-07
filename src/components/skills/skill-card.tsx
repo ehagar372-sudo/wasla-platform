@@ -16,8 +16,6 @@ export function SkillCard({ listing, t, locale }: { listing: Listing; t: Dict; l
       <PhotoSlot
         file={categoryPhoto(slug) ?? "/photos/categories/other.jpg"}
         alt={listing.category?.name ?? listing.title}
-        slotLabel={t.common.photoSlot}
-        quiet
         className="aspect-[16/9]"
         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         fallback={

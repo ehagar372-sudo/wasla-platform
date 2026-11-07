@@ -55,7 +55,6 @@ export default async function HowItWorksPage() {
             <PhotoSlot
               file={photos.howHero.file}
               alt={photos.howHero.alt[locale]}
-              slotLabel={t.common.photoSlot}
               priority
               sizes="(min-width: 1024px) 560px, 100vw"
               className="aspect-[4/3] rounded-[2rem] shadow-[var(--shadow-lg)] ring-1 ring-border"

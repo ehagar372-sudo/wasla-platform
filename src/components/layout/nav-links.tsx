@@ -33,8 +33,8 @@ export function NavLinks({
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               className={cx(
-                "rounded-full px-3.5 py-2 text-[0.95rem] font-semibold transition-colors",
-                active ? "bg-lavender text-accent" : "text-muted hover:bg-lavender hover:text-text",
+                "inline-flex whitespace-nowrap rounded-full px-3.5 py-2 text-[0.95rem] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+                active ? "bg-lavender font-bold text-accent" : "text-muted hover:bg-lavender hover:text-text",
                 linkClassName,
               )}
             >

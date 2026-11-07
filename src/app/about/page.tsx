@@ -40,7 +40,6 @@ export default async function AboutPage() {
             <PhotoSlot
               file={photos.about.file}
               alt={photos.about.alt[locale]}
-              slotLabel={t.common.photoSlot}
               className="aspect-[4/3] rounded-3xl shadow-[var(--shadow)] ring-1 ring-border"
             />
           </Reveal>

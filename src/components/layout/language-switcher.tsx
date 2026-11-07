@@ -13,7 +13,7 @@ export async function LanguageSwitcher() {
         type="submit"
         lang={next}
         aria-label={t.nav.switchLanguageLabel}
-        className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 text-sm font-semibold transition-colors hover:bg-lavender"
+        className="inline-flex h-10 items-center gap-1.5 whitespace-nowrap rounded-full border border-border bg-surface px-3 text-sm font-semibold transition-colors hover:bg-lavender"
       >
         <Globe className="size-4" aria-hidden="true" />
         {t.nav.switchLanguage}

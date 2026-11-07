@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { NavLinks, type NavLink } from "./nav-links";
 import { useI18n } from "@/lib/i18n/provider";
@@ -9,6 +10,10 @@ import { useI18n } from "@/lib/i18n/provider";
 export function MobileMenu({ links, children }: { links: NavLink[]; children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const { t } = useI18n();
+  const pathname = usePathname();
+
+  // Close whenever the route changes (covers every navigation, not just link clicks).
+  useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -18,7 +23,7 @@ export function MobileMenu({ links, children }: { links: NavLink[]; children: Re
   }, [open]);
 
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <button
         type="button"
         aria-expanded={open}
@@ -33,14 +38,14 @@ export function MobileMenu({ links, children }: { links: NavLink[]; children: Re
       {open && (
         <div
           id="mobile-nav"
-          className="absolute inset-x-0 top-full border-b border-border bg-bg/95 px-5 pb-6 pt-3 shadow-lg backdrop-blur-md"
+          className="absolute inset-x-0 top-full max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-border bg-bg px-4 pb-6 pt-3 shadow-lg sm:px-8"
         >
           <nav aria-label={t.nav.primary}>
             <NavLinks
               links={links}
               onNavigate={() => setOpen(false)}
               className="flex flex-col gap-1"
-              linkClassName="block py-3 text-base"
+              linkClassName="flex w-full min-h-12 items-center rounded-xl px-4 text-base"
             />
           </nav>
           <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4" onClick={() => setOpen(false)}>

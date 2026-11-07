@@ -71,8 +71,6 @@ export default async function SkillPage({ params }: Props) {
           <PhotoSlot
             file={categoryPhoto(listing.category?.slug) ?? "/photos/categories/other.jpg"}
             alt={listing.category?.name ?? listing.title}
-            slotLabel={t.common.photoSlot}
-            quiet
             priority
             sizes="(min-width: 1024px) 700px, 100vw"
             className="aspect-[16/8] rounded-3xl ring-1 ring-border"

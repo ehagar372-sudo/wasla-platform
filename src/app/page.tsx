@@ -46,7 +46,6 @@ export default async function HomePage() {
             <PhotoSlot
               file={photos.hero.file}
               alt={photos.hero.alt[locale]}
-              slotLabel={t.common.photoSlot}
               priority
               sizes="(min-width: 1024px) 560px, 100vw"
               className="aspect-[4/4.3] rounded-[2rem] shadow-[var(--shadow-lg)] ring-1 ring-border"
@@ -71,7 +70,6 @@ export default async function HomePage() {
             <PhotoSlot
               file={photos.concept.file}
               alt={photos.concept.alt[locale]}
-              slotLabel={t.common.photoSlot}
               className="aspect-[4/3] rounded-3xl shadow-[var(--shadow)] ring-1 ring-border"
             />
           </Reveal>
@@ -218,7 +216,6 @@ export default async function HomePage() {
             <PhotoSlot
               file={photos.language.file}
               alt={photos.language.alt[locale]}
-              slotLabel={t.common.photoSlot}
               className="aspect-[4/3] rounded-3xl shadow-[var(--shadow)] ring-1 ring-border"
             />
           </Reveal>

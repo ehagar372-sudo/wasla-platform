@@ -58,18 +58,19 @@ export async function Navbar() {
   );
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/70 bg-bg/85 backdrop-blur-md">
-      <div className="relative mx-auto flex h-[4.5rem] w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-bg/90 backdrop-blur-md">
+      {/* 3 columns: brand | centred navigation | actions. In RTL the brand sits on the right, actions on the left. */}
+      <div className="relative mx-auto grid h-16 w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-3 px-4 sm:h-[4.25rem] sm:px-8 xl:gap-6">
         <Logo name={t.meta.siteName} label={`${t.meta.siteName} — ${t.nav.home}`} />
 
-        <nav aria-label={t.nav.primary} className="hidden lg:block">
+        <nav aria-label={t.nav.primary} className="col-start-2 hidden justify-center xl:flex">
           <NavLinks links={links} className="flex items-center gap-1" />
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="col-start-3 flex items-center justify-end gap-2">
           <LanguageSwitcher />
           <ThemeToggle />
-          <div className="hidden items-center gap-2 lg:flex">{authActions}</div>
+          <div className="ms-1 hidden items-center gap-2 xl:flex">{authActions}</div>
           <MobileMenu links={links}>{authActions}</MobileMenu>
         </div>
       </div>
